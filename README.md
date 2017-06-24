@@ -1,4 +1,4 @@
-# funds_for_friends
+# funds4friends
 Pipeline to estimate long-term customer engagement from short-term user activivity using data from a 
 platform that allows groups of friends to pool money for common purposes. These include purchasing 
 gifts for common friends, paying rent, going together to a concert or a sport event, etc…
