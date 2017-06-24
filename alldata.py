@@ -9,17 +9,19 @@ from datetime import datetime
 
 def merge_data(num_users):
     '''
-    routine to load and merge datasets for user IDs, 
-    invitations and payments
+    Routine to load and merge three datasets for:
+    - user IDs
+    - invitations (sent and received)
+    - payments
     '''
     # load user IDs data
-    users = pd.read_csv('../data/users_moneypool.csv')
+    users = pd.read_csv('../data/users_company.csv')
     users = users.rename(columns = lambda x: 'user_' + x)
     del users['user_Unnamed: 0']
     users = users[users.user_id < num_users]
     
     # load payments ID data
-    payments = pd.read_csv('../data/payments_moneypool.csv')
+    payments = pd.read_csv('../data/payments_company.csv')
     payments = payments.rename(columns = lambda x: 'pay_' + x)
     payments = payments.rename(columns={'pay_user_id': 'user_id', 'pay_receiver_id':'pool_id'})
     del payments['pay_Unnamed: 0']
@@ -29,14 +31,14 @@ def merge_data(num_users):
     payments = payments[payments.pay_status != 'failed']
     
     # load liabilities (= invitations)
-    liabilities = pd.read_csv('../data/liabilities.csv')
+    liabilities = pd.read_csv('../data/liabilities_company.csv')
     liabilities = liabilities.rename(columns = lambda x: 'lb_' + x)
     liabilities = liabilities.rename(columns={'lb_pool_id': 'pool_id', 'lb_user_id': 'user_id'})
     del liabilities['lb_Unnamed: 0']
     liabilities = liabilities.sort_values(['user_id', 'lb_created_at'])
     
     # load pools
-    pool = pd.read_csv('../data/pools_ordered.csv')
+    pool = pd.read_csv('../data/pools_company.csv')
     pool = pool.rename(columns = lambda x: 'pool_' + x)
 
     # merge users & payments and sort by user ID
@@ -51,7 +53,7 @@ def merge_data(num_users):
 
 def add_features(data):
     '''
-    routine to compute new features using early activity 
+    Routine to compute new features using early activity 
     of each user and add pool data 
     '''
     pool = pd.read_csv('../data/pools_ordered.csv')
@@ -140,7 +142,7 @@ def add_features(data):
 
 def make_labels(df):
     '''
-    compute labels and output dataset to be used for 
+    Routine to compute labels and output dataset to be used for 
     ML predictions
     '''
 
