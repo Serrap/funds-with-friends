@@ -9,10 +9,11 @@ The datasets include user IDs, and their activity as a function of time, such as
 vs non-engaged customers and to perform feature engineering. 
 
 The main features considered are four. They account both for the number of people connected to 
-the first two pools used by each user and the time elapsed between the first two payments and the first 
+the first two pools used by each user and for the time elapsed between the first two payments and the first 
 two invitations (sent or received) by each user. The idea behind the computation of these features is that:
-1) Engaged customers contribute to pools that are linked to more people respect to unengaed users
-2) Engaged customers use the product more frequently than unengaged users already from their first use of the product.
+1) Engaged customers contribute to pools that are linked to more people respect to unengaged users
+2) Engaged customers use the product more frequently than unengaged users. This different behavior 
+is already present from their first use of the product.
 
 Main files:
 
