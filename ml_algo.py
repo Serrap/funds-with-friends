@@ -126,7 +126,7 @@ def random_forest(df):
     clf.fit(x_train, y_train)
     predict_proba =  clf.predict_proba(x_test)
     predict = clf.predict(x_test)
-# compute confusion matrix
+# compute confusion matrix (normalized)
     cm = confusion_matrix(y_test, predict)
     cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     print('matrix for feature engineered model')
@@ -162,7 +162,7 @@ def random_forest(df):
     for f in range(df.shape[1]):
         print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
 
-# 
+# rename variables for plotting purposes
     df_bar = df_bar[['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'L', 'M', 'N', 'O', 'P']]
     df_bar = df_bar.rename(columns ={'A': 'Time between invitations',
                                      'B': 'Time between payments',
