@@ -28,3 +28,18 @@ and to compute predictions using a Random Forest Classifier (using scikit-learn)
 
 3) ml_algo.py: This file computes predictions using a Random Forest Classifier, together with multiple summary 
 statisitics such as accuracy, precision, recall, F1 score, etc...
+
+Figures:
+
+1) Fig1.png
+Figure showing the basic mechanism to create and contribute to a given pool
+
+2) Fig3.png
+Figure showing a crowded pool: the number of IDs connected to a pool can be used as an indicator of engagement
+
+3) Fig4.png
+Figure showing a pool with few users connected: again, the number of IDs connected to a pool can be used as an indicator of engagement
+
+4) Fig7.png
+Figure showing "temporal clustering". Ada contributed to 2 pools in a shorter amount of time respec to Tom: She has a higher chance of becoming an engaged user
+
