@@ -26,7 +26,7 @@ from sklearn.metrics import accuracy_score
 
 def random_forest(df):
     print('number of total users is:', df.shape)
-    print('number of uningaged is:', df[df.churn ==0].shape[0])
+    print('number of unengaged is:', df[df.churn ==0].shape[0])
     df['date'] = pd.to_datetime(df.Date_out).values.astype('float')
 
 # use only most important features
