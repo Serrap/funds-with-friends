@@ -19,10 +19,10 @@ is already present from their first uses of the product. See Fig7.png
 Main files:
 
 1) main.py: Main, interactive file to run the pipeline in python3. It calls subroutines in two files 
-(all_data.py and random_forest.py). These files are used to load, merge and analyze four datasets, 
+(alldata.py and random_forest.py). These files are used to load, merge and analyze four datasets, 
 and to compute predictions using a Random Forest Classifier (using scikit-learn). 
 
-2) all_data.py: This file contains three subroutines (merge_data, add_features, make_labels).
+2) alldata.py: This file contains three subroutines (merge_data, add_features, make_labels).
 - merge_data: subroutine to merge data for user IDs, invitations and payments
 - add_features: subroutine to compute new features from the early activity of each user
 - make_labels: subroutine to label all data and output final dataset to be used for Machine Learning predictions 
