@@ -11,9 +11,10 @@ vs non-engaged customers and to perform feature engineering.
 The main features considered are four. They account both for the number of people connected to 
 the first two pools used by each user and for the time elapsed between the first two payments and the first 
 two invitations (sent or received) by each user. The idea behind the computation of these features is that:
-1) Engaged customers contribute to pools that are linked to more people respect to unengaged users (network effect)
+1) Engaged customers contribute to pools that are linked to more people respect to unengaged users (network effect). 
+See Fig3.png, Fig4.png
 2) Engaged customers use the product more frequently than unengaged users. This different behavior 
-is already present from their first uses of the product.
+is already present from their first uses of the product. See Fig7.png
 
 Main files:
 
