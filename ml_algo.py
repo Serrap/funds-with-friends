@@ -72,60 +72,19 @@ def random_forest(df):
 # cross validation: divide the dataset in train / test data
     x_train, x_test, y_train, y_test = train_test_split(df, target, test_size = 0.3, random_state = 0)
 
-# consider multiple ML algorithms
-# SVC
-#svc = svm.SVC()
-#svc.fit(x_train, y_train)
-#svc_score = svc.score(x_test, y_test)
-#print('svc_score: ', svc_score)
-#pdb.set_trace()
-
-# KNN
-#knn = KNeighborsClassifier(n_neighbors = 3)
-#knn.fit(x_train, x_train)
-#knn_score = knn.score(x_test, y_test)
-#print('knn_score: ', knn_score)
-#pdb.set_trace()
-
-# Gaussian Naive Bayes
-#gaussian = GaussianNB()
-#gaussian.fit(x_train, y_train)
-#gaussian_score = gaussian.score(x_test, y_test)
-#print('gaussian_score: ', gaussian_score)
-#pdb.set_trace()
-
-# Perceptron
-#perceptron = Perceptron()
-#perceptron.fit(x_train, y_train)
-#perceptron_score = perceptron.score(x_test, y_test)
-#print('perceptron_score: ', perceptron_score)
-
-# Decision Tree
-#decision_tree = tree.DecisionTreeClassifier()
-#decision_tree.fit(x_train, y_train)
-#decision_tree_score = decision_tree.score(x_test, y_test)
-#print('decision tree score: ', decision_tree_score)
-#pdb.set_trace()
-
-# logistic regression
-#clf = linear_model.LogisticRegression()
-#clf.fit(x_train, y_train)
-#score = clf.score(x_test, y_test)
-#print('logistic regression score: ', score)
-
-# Random Forest with balanced classes (our categories are umbalanced)
-    clf = RandomForestClassifier(n_estimators=100, class_weight = 'balanced')
-
+# Model evaluation
 # use a full grid over all parameters (not used)
-#param_grid = {'n_estimators': [20, 100, 200, 500], 
-#              "bootstrap": [True, False],
-#              "criterion": ["gini", "entropy"]}
+    param_grid = {'max_depth': range(1, 10), 
+                  "n_estimators": [20, 100, 200, 500], 
+                  "bootstrap": [True, False],
+                  "criterion": ["gini", "entropy"]
+                  "max_features": [1, 3, 5, X_train.shape[1]}
 # run grid search
-#grid_search = GridSearchCV(clf, param_grid=param_grid)
+    grid_search = GridSearchCV(clf, param_grid=param_grid)
 
-    clf.fit(x_train, y_train)
-    predict_proba =  clf.predict_proba(x_test)
-    predict = clf.predict(x_test)
+    grid_search.fit(x_train, y_train)
+    predict_proba =  grid_search.predict_proba(x_test)
+    predict = grid_search.predict(x_test)
 # compute confusion matrix (normalized)
     cm = confusion_matrix(y_test, predict)
     cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
@@ -151,12 +110,12 @@ def random_forest(df):
 #grid_search.fit(x_train, y_train)
 #grid_search_score = grid_search.score(x_test, y_test)
 
-    random_forest_score = clf.score(x_test, y_test)
+    random_forest_score = grid_search.score(x_test, y_test)
     print('random_forest_score in the feature engineering case: ', random_forest_score)
 
 # print/plot feature importance
-    importances = clf.feature_importances_
-    std = np.std([tree.feature_importances_ for tree in clf.estimators_],axis=0)
+    importances = grid_search.feature_importances_
+    std = np.std([tree.feature_importances_ for tree in grid_search.estimators_],axis=0)
     indices = np.argsort(importances)[::-1]
     print("Feature ranking:")
     for f in range(df.shape[1]):
